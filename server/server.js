@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 //	routes imports
 const authRoutes = require('./routes/auth');
 const usersRoutes = require('./routes/users');
+const hotelsRoutes = require('./routes/hotels');
 
 const app = express();
 dotenv.config();
@@ -32,6 +33,7 @@ app.use(cookieParser());
 //	routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', usersRoutes);
+app.use('/api/v1/hotels', hotelsRoutes);
 
 //	error handler
 app.use((err, req, res, next) => {
