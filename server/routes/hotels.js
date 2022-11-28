@@ -5,7 +5,7 @@ const {
   createHotel,
   deleteHotel,
   getHotel,
-
+  getHotelRooms,
   getHotels,
   updateHotel,
 } = require('../controllers/hotel.js');
@@ -28,5 +28,6 @@ router.get('/find/:id', getHotel);
 router.get('/', getHotels);
 router.get('/countByCity', countByCity);
 router.get('/countByType', countByType);
+router.get('/room/:id', getHotelRooms);
 
 module.exports = router;
