@@ -26,6 +26,7 @@ mongoose.connection.on('disconnected', () => {
 
 //	middlewares
 app.use(express.json());
+app.use(cookieParser());
 
 //	routes
 app.use('/api/v1/auth', authRoutes);
