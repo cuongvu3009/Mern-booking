@@ -1,15 +1,34 @@
+//	packapge imports
 const express = require('express');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
+//	routes imports
+const authRoutes = require('./routes/auth');
+
 const app = express();
 dotenv.config();
 
-//	routes
-app.get('/', (req, res) => {
-  res.send('Hello World from be');
+//	database
+const connectDB = async () => {
+  try {
+    mongoose.connect(process.env.MONGO_URI);
+    console.log('Connected to mongoDB.');
+  } catch (error) {
+    throw error;
+  }
+};
+
+mongoose.connection.on('disconnected', () => {
+  console.log('mongoDB disconnected!');
 });
+
+//	middlewares
+app.use(express.json());
+
+//	routes
+app.use('/api/v1/auth', authRoutes);
 
 //	error handler
 app.use((err, req, res, next) => {
@@ -21,11 +40,6 @@ app.use((err, req, res, next) => {
     message,
   });
 });
-
-const connectDB = async () => {
-  mongoose.connect(process.env.MONGO_URI);
-  console.log('DB is connected!');
-};
 
 connectDB();
 
