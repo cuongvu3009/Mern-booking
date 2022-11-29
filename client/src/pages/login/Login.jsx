@@ -34,32 +34,34 @@ const Login = () => {
 
   return (
     <div className='login'>
-      <form className='lContainer' onSubmit={handleLogin}>
-        <input
-          type='text'
-          placeholder='username'
-          onChange={(e) => setUsername(e.target.value)}
-          id='username'
-          className='lInput'
-        />
-        <input
-          type='password'
-          placeholder='password'
-          onChange={(e) => setPassword(e.target.value)}
-          id='password'
-          className='lInput'
-        />
-        <button className='lButton' type='submit'>
-          Login
-        </button>
-      </form>
+      <div className='lContainer'>
+        <form onSubmit={handleLogin} className='lContainer'>
+          <input
+            type='text'
+            placeholder='username'
+            onChange={(e) => setUsername(e.target.value)}
+            id='username'
+            className='lInput'
+          />
+          <input
+            type='password'
+            placeholder='password'
+            onChange={(e) => setPassword(e.target.value)}
+            id='password'
+            className='lInput'
+          />
+          <button className='lButton' type='submit'>
+            Login
+          </button>
+        </form>
 
-      <p>
-        New member? <Link to='/register'>Register</Link>
-      </p>
-      <p>
-        Just looking around? <Link to='/'>Back home</Link>
-      </p>
+        <p>
+          New member? <Link to='/register'>Register</Link>
+        </p>
+        <p>
+          Just looking around? <Link to='/'>Back home</Link>
+        </p>
+      </div>
     </div>
   );
 };

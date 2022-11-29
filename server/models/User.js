@@ -12,14 +12,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    country: {
-      type: String,
-      required: true,
-    },
-    img: {
-      type: String,
-    },
-    city: {
+    password: {
       type: String,
       required: true,
     },
@@ -27,9 +20,17 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    password: {
+    city: {
       type: String,
       required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+    img: {
+      type: String,
+      default: '',
     },
     isAdmin: {
       type: Boolean,
