@@ -195,7 +195,11 @@ const Header = ({ type }) => {
                 )}
               </div>
               <div className='headerSearchItem'>
-                <button className='headerBtn' onClick={handleSearch}>
+                <button
+                  className='headerBtn'
+                  onClick={handleSearch}
+                  disabled={!destination}
+                >
                   Search
                 </button>
               </div>
