@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import userReducer from './userSlice';
+import searchSlice from './searchSlice';
 
 //	redux persist
 import {
@@ -20,7 +21,7 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ user: userReducer });
+const rootReducer = combineReducers({ user: userReducer, search: searchSlice });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
