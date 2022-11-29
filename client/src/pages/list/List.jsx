@@ -15,6 +15,14 @@ const List = () => {
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
 
+  const { data, loading, error, reFetch } = useFetch(
+    `api/v1/hotels?city=${destination}`
+  );
+
+  const handleClick = () => {
+    reFetch();
+  };
+
   return (
     <div>
       <Navbar />
@@ -24,8 +32,9 @@ const List = () => {
           <div className='listSearch'>
             <h1 className='lsTitle'>Search</h1>
             <div className='lsItem'>
-              <label>Destination</label>
-              <input placeholder={destination} type='text' />
+              <label>
+                Destination: <h3>{destination}</h3>
+              </label>
             </div>
             <div className='lsItem'>
               <label>Check-in Date</label>
@@ -73,18 +82,13 @@ const List = () => {
                 </div>
               </div>
             </div>
-            <button>Search</button>
+            <button onClick={handleClick}>Search</button>
           </div>
           <div className='listResult'>
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {data.length === 0 && <h1>No properties with this search</h1>}
+            {data.map((item) => (
+              <SearchItem item={item} key={item._id} />
+            ))}
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ const Navbar = () => {
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <button className='navButton'>
                 <Link to='/' className='styledLink'>
-                  Manage Account
+                  Dashboard
                 </Link>
               </button>
               <button className='navButton' onClick={() => dispatch(logout())}>
