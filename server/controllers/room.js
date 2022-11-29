@@ -1,4 +1,5 @@
 const Room = require('../models/Room.js');
+const User = require('../models/User');
 const Hotel = require('../models/Hotel.js');
 const { createError } = require('../utils/error.js');
 
@@ -67,10 +68,27 @@ const getRooms = async (req, res, next) => {
   }
 };
 
+const updateRoomAvailability = async (req, res, next) => {
+  try {
+    await Room.findByIdAndUpdate(req.params.id, {
+      $push: { unavailableDates: req.body.dates },
+    });
+
+    await User.findByIdAndUpdate(req.user.id, {
+      $push: { bookedRoom: req.params.id, bookedDate: req.body.dates },
+    });
+
+    res.status(200).json('Room status has been updated.');
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createRoom,
   updateRoom,
   deleteRoom,
   getRoom,
   getRooms,
+  updateRoomAvailability,
 };

@@ -36,6 +36,12 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    bookedRoom: {
+      type: [String],
+    },
+    bookedDate: {
+      type: [String],
+    },
   },
   { timestamps: true }
 );
