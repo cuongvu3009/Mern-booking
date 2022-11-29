@@ -1,19 +1,25 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './login.css';
 
 const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <div className='login'>
       <div className='lContainer'>
         <input
           type='text'
           placeholder='username'
+          onChange={(e) => setUsername(e.target.value)}
           id='username'
           className='lInput'
         />
         <input
           type='password'
           placeholder='password'
+          onChange={(e) => setPassword(e.target.value)}
           id='password'
           className='lInput'
         />
