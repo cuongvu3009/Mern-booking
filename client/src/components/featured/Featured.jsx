@@ -6,7 +6,9 @@ const Featured = () => {
     'api/v1/hotels/countByCity?cities=helsinki,espoo,vantaa'
   );
 
-  console.log(data);
+  if (error) {
+    return <h3>Something went wrong fetching this data!</h3>;
+  }
 
   return (
     <div className='featured'>
