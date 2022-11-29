@@ -24,9 +24,9 @@ const Hotel = () => {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
-  const { data, loading, error } = useFetch(`api/v1/hotels/find/${id}`);
 
-  console.log(data);
+  const { data, loading, error } = useFetch(`/api/v1/hotels/find/${id}`);
+  console.log(error);
   const photos = [
     {
       src: 'https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1',
@@ -111,7 +111,7 @@ const Hotel = () => {
             <button className='bookNow' onClick={handleClick}>
               Reserve or Book Now!
             </button>
-            <h1 className='hotelTitle'>Tower Street Apartments</h1>
+            <h1 className='hotelTitle'>{data.name}</h1>
             <div className='hotelAddress'>
               <FontAwesomeIcon icon={faLocationDot} />
               <span>Elton St 125 New york</span>
@@ -151,17 +151,6 @@ const Hotel = () => {
                   Apartments, and the property offers a paid airport shuttle
                   service.
                 </p>
-              </div>
-              <div className='hotelDetailsPrice'>
-                <h1>Perfect for a 9-night stay!</h1>
-                <span>
-                  Located in the real heart of Krakow, this property has an
-                  excellent location score of 9.8!
-                </span>
-                <h2>
-                  <b>$945</b> (9 nights)
-                </h2>
-                <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
             </div>
           </div>

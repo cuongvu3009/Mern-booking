@@ -10,10 +10,9 @@ import { useSelector } from 'react-redux';
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data, loading, error } = useFetch(`api/v1/hotels/room/${hotelId}`);
+  const { data } = useFetch(`/api/v1/hotels/room/${hotelId}`);
   const { date } = useSelector((state) => state.search);
 
-  console.log(data);
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -56,14 +55,15 @@ const Reserve = ({ setOpen, hotelId }) => {
     try {
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(`api/v1/rooms/availability/${roomId}`, {
+          const res = axios.put(`/api/v1/rooms/availability/${roomId}`, {
             dates: alldates,
           });
+
           return res.data;
         })
       );
       setOpen(false);
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {}
   };
 
@@ -76,7 +76,7 @@ const Reserve = ({ setOpen, hotelId }) => {
           onClick={() => setOpen(false)}
         />
         <span>Select your rooms:</span>
-        {data.map((item) => (
+        {data?.map((item) => (
           <div className='rItem' key={item._id}>
             <div className='rItemInfo'>
               <div className='rTitle'>{item.title}</div>
@@ -85,19 +85,12 @@ const Reserve = ({ setOpen, hotelId }) => {
                 Max people: <b>{item.maxPeople}</b>
               </div>
               <div className='rPrice'>{item.price}</div>
-            </div>
-            <div className='rSelectRooms'>
-              {item.roomNumbers.map((roomNumber) => (
-                <div className='room'>
-                  <label>{roomNumber.number}</label>
-                  <input
-                    type='checkbox'
-                    value={roomNumber._id}
-                    onChange={handleSelect}
-                    disabled={!isAvailable(roomNumber)}
-                  />
-                </div>
-              ))}
+              <input
+                type='checkbox'
+                value={item._id}
+                onChange={handleSelect}
+                disabled={!isAvailable(item)}
+              />
             </div>
           </div>
         ))}
