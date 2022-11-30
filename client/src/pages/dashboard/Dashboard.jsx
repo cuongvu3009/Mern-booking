@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import './dashboard.css';
-import useFetch from '../../hooks/useFetch';
 import axios from 'axios';
 import BookedCard from '../../components/bookedCard';
 

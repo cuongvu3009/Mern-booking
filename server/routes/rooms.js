@@ -9,14 +9,14 @@ const {
 } = require('../controllers/room.js');
 const {
   verifyAdmin,
-  verifyUser,
+
   verifyToken,
 } = require('../utils/verifyToken.js');
 
 const router = express.Router();
 
 //CREATE
-router.post('/:hotelid', verifyAdmin, createRoom);
+router.post('/:hotelId', verifyAdmin, createRoom);
 
 //UPDATE
 router.put('/availability/:id', verifyToken, updateRoomAvailability);

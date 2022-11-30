@@ -1,12 +1,36 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import useFetch from '../hooks/useFetch';
+
 const BookedCard = ({ dates, room }) => {
+  const [hotel, setHotel] = useState({});
   const formatDates = dates.map((d) => {
     let myDate = new Date(Number(d));
     return myDate.toDateString();
   });
 
+  const { data } = useFetch(`/api/v1/rooms/${room}`);
+
+  useEffect(() => {
+    const fetchHotel = async () => {
+      const res = await axios.get(`/api/v1/hotels/find/${data.hotelId}`);
+      setHotel(res.data);
+    };
+    fetchHotel();
+  }, [data]);
+
   return (
     <>
-      <p>Booked room: {room}</p>
+      <p>Booked room:</p>
+      <ul>
+        <li>Hotel: {hotel.name}</li>
+        <li>
+          Hotel address: {hotel.address} - {hotel.city}
+        </li>
+        <li>Room type: {data.title}</li>
+        <li>Description: {data.desc}</li>
+        <li>Room id: {data._id}</li>
+      </ul>
       <p>Booked date:</p>
       <ul>
         {formatDates.map((d) => {
