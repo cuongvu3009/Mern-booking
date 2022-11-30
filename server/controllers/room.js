@@ -75,7 +75,12 @@ const updateRoomAvailability = async (req, res, next) => {
     });
 
     await User.findByIdAndUpdate(req.user.id, {
-      $push: { bookedRooms: { room: req.body.room, dates: req.body.dates } },
+      $push: {
+        bookedRooms: {
+          $each: [{ room: req.body.room, dates: req.body.dates }],
+          $position: 0,
+        },
+      },
     });
 
     res.status(200).json('Room status has been updated.');
