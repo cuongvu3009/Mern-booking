@@ -21,7 +21,10 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ user: userReducer, search: searchSlice });
+const rootReducer = combineReducers({
+  user: userReducer,
+  search: searchSlice,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

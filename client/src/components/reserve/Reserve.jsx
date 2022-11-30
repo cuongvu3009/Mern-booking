@@ -12,6 +12,9 @@ const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
   const { data } = useFetch(`/api/v1/hotels/room/${hotelId}`);
   const { date } = useSelector((state) => state.search);
+  const [payment, setPayment] = useState([]);
+
+  const navigate = useNavigate();
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -42,14 +45,23 @@ const Reserve = ({ setOpen, hotelId }) => {
   const handleSelect = (e) => {
     const checked = e.target.checked;
     const value = e.target.value;
+
     setSelectedRooms(
       checked
         ? [...selectedRooms, value]
         : selectedRooms.filter((item) => item !== value)
     );
   };
+  const handleCheck = (e) => {
+    const checked = e.target.checked;
+    const value = e.target.value;
 
-  const navigate = useNavigate();
+    setPayment(
+      checked ? [...payment, value] : payment?.filter((item) => item !== value)
+    );
+  };
+
+  console.log(payment);
 
   const handleClick = async () => {
     try {
@@ -58,11 +70,13 @@ const Reserve = ({ setOpen, hotelId }) => {
           const res = axios.put(`/api/v1/rooms/availability/${roomId}`, {
             room: roomId,
             dates: alldates,
+            paid: payment,
           });
 
           return res.data;
         })
       );
+
       setOpen(false);
       navigate('/dashboard');
     } catch (err) {}
@@ -77,30 +91,46 @@ const Reserve = ({ setOpen, hotelId }) => {
           onClick={() => setOpen(false)}
         />
         <span>Select your rooms:</span>
-        {data?.map((item) => (
-          <div className='rItem' key={item._id}>
-            <div className='rItemInfo'>
-              <div className='rTitle'>{item.title}</div>
-              <div className='rDesc'>{item.desc}</div>
-              <div className='rMax'>
-                Max people: <b>{item.maxPeople}</b>
+        {data?.map((item) => {
+          return (
+            <div className='rItem' key={item._id}>
+              <div className='rItemInfo'>
+                <div className='rTitle'>{item.title}</div>
+                <div className='rDesc'>{item.desc}</div>
+                <div className='rMax'>
+                  Max people: <b>{item.maxPeople}</b>
+                </div>
+                <div className='rPrice'>€{item.price} / night</div>
+                <div className=''>
+                  Number of nights to stay: <b>{alldates.length}</b>
+                </div>
+                <div className='rPrice'>
+                  Total price: <b>€{item.price * alldates.length}</b>
+                </div>
+                <p>
+                  <input
+                    type='checkbox'
+                    value={item._id}
+                    price={item.price}
+                    onChange={handleSelect}
+                    disabled={!isAvailable(item)}
+                  />{' '}
+                  Select this room
+                </p>
+
+                <p>
+                  <input
+                    type='checkbox'
+                    value={item.price}
+                    onChange={handleCheck}
+                    disabled={!isAvailable(item)}
+                  />{' '}
+                  I agree with this room rules
+                </p>
               </div>
-              <div className='rPrice'>€{item.price} / night</div>
-              <div className=''>
-                Number of nights to stay: <b>{alldates.length}</b>
-              </div>
-              <div className='rPrice'>
-                Total price: <b>€{item.price * alldates.length}</b>
-              </div>
-              <input
-                type='checkbox'
-                value={item._id}
-                onChange={handleSelect}
-                disabled={!isAvailable(item)}
-              />
             </div>
-          </div>
-        ))}
+          );
+        })}
         <button onClick={handleClick} className='rButton'>
           Reserve Now!
         </button>

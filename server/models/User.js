@@ -44,6 +44,9 @@ const UserSchema = new mongoose.Schema(
         dates: {
           type: [String],
         },
+        paid: {
+          type: [String],
+        },
       },
     ],
   },
