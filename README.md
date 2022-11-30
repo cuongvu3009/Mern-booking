@@ -22,7 +22,7 @@ JWT = <YOUR_JWT_SECRET_KEY>
 ```
 2. Go to server folder and run "npm install" to install the dependencies
 3. Go to client folder and run "npm install" to install the dependencies
-5. Create an account using username/email/password
+5. Create an account using username/email/password, you can add {"isAdmin": true} in req.body when creating user in your postman/insomnia, to make it admin. With isAdmin is true, you can able to create/update/delete hotels, create/update/delete rooms, get all users, verify user role. 
 
 ## Start the project
 
