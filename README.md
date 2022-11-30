@@ -30,8 +30,7 @@ JWT = <YOUR_JWT_SECRET_KEY>
 2. In client directory, run "npm start" to start the client side 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
 [API routes] can be accessed on [http://localhost:5000/api/v1/]. This endpoint can be edited in `server/server.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
