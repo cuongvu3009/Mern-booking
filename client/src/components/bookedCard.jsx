@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch';
 
-const BookedCard = ({ dates, room, paid }) => {
+const BookedCard = ({ dates, room, paid, createdAt }) => {
   const [hotel, setHotel] = useState({});
   const formatDates = dates.map((d) => {
     let myDate = new Date(Number(d));
@@ -22,15 +22,14 @@ const BookedCard = ({ dates, room, paid }) => {
 
   return (
     <>
+      <p>You reserved this room on: {createdAt}</p>
       <p>Booked room:</p>
       <ul>
         <li>Hotel: {hotel.name}</li>
-        <li>
-          Hotel address: {hotel.address} - {hotel.city}
-        </li>
+        <li>Hotel address: {hotel.address}</li>
         <li>Room type: {data.title}</li>
         <li>Description: {data.desc}</li>
-        <li>Payment made: {paid * dates.length}</li>
+        <li>Payment made: €{paid * dates.length}</li>
         <li>Room id: {data._id}</li>
       </ul>
       <p>Booked date:</p>

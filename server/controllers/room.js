@@ -1,6 +1,7 @@
 const Room = require('../models/Room.js');
 const User = require('../models/User');
 const Hotel = require('../models/Hotel.js');
+const moment = require('moment');
 const { createError } = require('../utils/error.js');
 
 const createRoom = async (req, res, next) => {
@@ -82,6 +83,7 @@ const updateRoomAvailability = async (req, res, next) => {
               room: req.body.room,
               dates: req.body.dates,
               paid: req.body.paid,
+              reservedAt: moment.utc(req.body.reservedAt),
             },
           ],
           $position: 0,

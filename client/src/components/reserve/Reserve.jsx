@@ -61,8 +61,6 @@ const Reserve = ({ setOpen, hotelId }) => {
     );
   };
 
-  console.log(payment);
-
   const handleClick = async () => {
     try {
       await Promise.all(

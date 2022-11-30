@@ -38,15 +38,20 @@ const UserSchema = new mongoose.Schema(
     },
     bookedRooms: [
       {
-        room: {
-          type: String,
-        },
-        dates: {
-          type: [String],
-        },
-        paid: {
-          type: [String],
-        },
+        type: new mongoose.Schema(
+          {
+            room: {
+              type: String,
+            },
+            dates: {
+              type: [String],
+            },
+            paid: {
+              type: [String],
+            },
+          },
+          { timestamps: true }
+        ),
       },
     ],
   },
