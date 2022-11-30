@@ -85,7 +85,13 @@ const Reserve = ({ setOpen, hotelId }) => {
               <div className='rMax'>
                 Max people: <b>{item.maxPeople}</b>
               </div>
-              <div className='rPrice'>{item.price}</div>
+              <div className='rPrice'>€{item.price} / night</div>
+              <div className=''>
+                Number of nights to stay: <b>{alldates.length}</b>
+              </div>
+              <div className='rPrice'>
+                Total price: <b>€{item.price * alldates.length}</b>
+              </div>
               <input
                 type='checkbox'
                 value={item._id}
