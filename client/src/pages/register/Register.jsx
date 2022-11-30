@@ -1,8 +1,7 @@
 import './register.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { loginSuccess } from '../../redux/userSlice';
-import { useDispatch } from 'react-redux';
+
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -15,12 +14,11 @@ const Register = () => {
   const [country, setCountry] = useState('');
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/api/v1/auth/register', {
+      await axios.post('/api/v1/auth/register', {
         username,
         email,
         password,
@@ -37,7 +35,7 @@ const Register = () => {
 
       setTimeout(() => {
         navigate('/login');
-      }, 1000);
+      }, 500);
     } catch (error) {
       console.log(error);
     }

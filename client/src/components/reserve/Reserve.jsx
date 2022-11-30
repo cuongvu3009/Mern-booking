@@ -56,6 +56,7 @@ const Reserve = ({ setOpen, hotelId }) => {
       await Promise.all(
         selectedRooms.map((roomId) => {
           const res = axios.put(`/api/v1/rooms/availability/${roomId}`, {
+            room: roomId,
             dates: alldates,
           });
 
