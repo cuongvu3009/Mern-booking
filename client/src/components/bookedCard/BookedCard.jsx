@@ -36,7 +36,12 @@ const BookedCard = ({ dates, room, paid, createdAt }) => {
             <li>Room type: {data.title}</li>
             <li>Description: {data.desc}</li>
             <li>
-              Payment made: €<b>{paid * dates.length}</b>
+              Payment made:
+              <b>
+                {/* This is temporary approach, will fix soon! */}€
+                {Number(paid[0]) * dates.length}
+                {paid[1] && <>, €{Number(paid[1]) * dates.length}</>}
+              </b>
             </li>
           </ul>
         </div>

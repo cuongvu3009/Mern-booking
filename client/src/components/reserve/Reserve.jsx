@@ -47,22 +47,18 @@ const Reserve = ({ setOpen, hotelId }) => {
   //	making an arr of selected rooms
   const handleSelect = (e) => {
     const checked = e.target.checked;
-    const value = e.target.value;
+    const value = e.target.value.split(' ');
 
     setSelectedRooms(
       checked
-        ? [...selectedRooms, value]
-        : selectedRooms.filter((item) => item !== value)
+        ? [...selectedRooms, value[0]]
+        : selectedRooms.filter((item) => item !== value[0])
     );
-  };
-
-  //	making an arr of payment made, corresponding to room chosen
-  const handleCheck = (e) => {
-    const checked = e.target.checked;
-    const value = e.target.value;
 
     setPayment(
-      checked ? [...payment, value] : payment?.filter((item) => item !== value)
+      checked
+        ? [...payment, value[1]]
+        : payment?.filter((item) => item !== value[1])
     );
   };
 
@@ -73,7 +69,7 @@ const Reserve = ({ setOpen, hotelId }) => {
           const res = axios.put(`/api/v1/rooms/availability/${roomId}`, {
             room: roomId,
             dates: alldates,
-            paid: payment,
+            paid: payment.map((p) => p),
           });
 
           return res.data;
@@ -117,22 +113,11 @@ const Reserve = ({ setOpen, hotelId }) => {
                 <p>
                   <input
                     type='checkbox'
-                    value={item._id}
-                    price={item.price}
+                    value={`${item._id} ${item.price}`}
                     onChange={handleSelect}
                     disabled={!isAvailable(item)}
                   />{' '}
                   Select this room
-                </p>
-
-                <p>
-                  <input
-                    type='checkbox'
-                    value={item.price}
-                    onChange={handleCheck}
-                    disabled={!isAvailable(item)}
-                  />{' '}
-                  I agree with this room rules
                 </p>
               </div>
             </div>
