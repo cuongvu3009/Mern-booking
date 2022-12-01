@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import './list.css';
 import Navbar from '../../components/navbar/Navbar';
 import Header from '../../components/header/Header';
@@ -15,9 +16,8 @@ const List = () => {
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
 
-  const { data, loading, error, reFetch } = useFetch(
-    `api/v1/hotels?city=${destination}`
-  );
+  //	fetch number of hotels based on destination
+  const { data, reFetch } = useFetch(`api/v1/hotels?city=${destination}`);
 
   const handleClick = () => {
     reFetch();

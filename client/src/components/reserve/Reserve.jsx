@@ -16,6 +16,7 @@ const Reserve = ({ setOpen, hotelId }) => {
   const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
 
+  //	get dates ranges, which return an array of dates choosen
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -34,6 +35,7 @@ const Reserve = ({ setOpen, hotelId }) => {
 
   const alldates = getDatesInRange(date[0].startDate, date[0].endDate);
 
+  //	check if dates about to book available or not, if someone else already booked, it will return false
   const isAvailable = (roomNumber) => {
     const isFound = roomNumber.unavailableDates.some((date) =>
       alldates.includes(new Date(date).getTime())
@@ -42,6 +44,7 @@ const Reserve = ({ setOpen, hotelId }) => {
     return !isFound;
   };
 
+  //	making an arr of selected rooms
   const handleSelect = (e) => {
     const checked = e.target.checked;
     const value = e.target.value;
@@ -52,6 +55,8 @@ const Reserve = ({ setOpen, hotelId }) => {
         : selectedRooms.filter((item) => item !== value)
     );
   };
+
+  //	making an arr of payment made, corresponding to room chosen
   const handleCheck = (e) => {
     const checked = e.target.checked;
     const value = e.target.value;

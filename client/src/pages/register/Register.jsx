@@ -17,6 +17,7 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  //	post register
   const handleSignup = async (e) => {
     e.preventDefault();
     setError(false);

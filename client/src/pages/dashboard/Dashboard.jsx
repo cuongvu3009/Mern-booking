@@ -11,6 +11,7 @@ const Dashboard = () => {
   const { username, email } = currentUser.details;
   const [bookings, setBookings] = useState([]);
 
+  //	fetch user info
   useEffect(() => {
     const fetchUser = async () => {
       const res = await axios.get(`/api/v1/users/${currentUser.details._id}`);

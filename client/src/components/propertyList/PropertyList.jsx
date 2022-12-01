@@ -2,6 +2,7 @@ import useFetch from '../../hooks/useFetch';
 import './propertyList.css';
 
 const PropertyList = () => {
+  //	fech hotels by property type
   const { data, loading, error } = useFetch('api/v1/hotels/countByType');
 
   if (error) {

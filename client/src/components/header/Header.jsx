@@ -21,6 +21,8 @@ const Header = ({ type }) => {
   const dispatch = useDispatch();
   const [destination, setDestination] = useState('');
   const [openDate, setOpenDate] = useState(false);
+  const navigate = useNavigate();
+
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -28,6 +30,7 @@ const Header = ({ type }) => {
       key: 'selection',
     },
   ]);
+
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -35,8 +38,7 @@ const Header = ({ type }) => {
     room: 1,
   });
 
-  const navigate = useNavigate();
-
+  //	get reponse data when customer making options for how many adult, children and room
   const handleOption = (name, operation) => {
     setOptions((prev) => {
       return {
@@ -46,6 +48,7 @@ const Header = ({ type }) => {
     });
   };
 
+  //	making search functioninal
   const handleSearch = () => {
     dispatch(newSearch({ destination, date, options }));
     navigate('/hotels', { state: { destination, date, options } });

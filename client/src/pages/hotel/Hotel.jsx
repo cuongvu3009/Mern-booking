@@ -25,7 +25,7 @@ const Hotel = () => {
   const [openModal, setOpenModal] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
 
-  const { data, loading, error } = useFetch(`/api/v1/hotels/find/${id}`);
+  const { data, loading } = useFetch(`/api/v1/hotels/find/${id}`);
 
   const photos = [
     {

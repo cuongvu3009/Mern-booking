@@ -10,8 +10,10 @@ const BookedCard = ({ dates, room, paid, createdAt }) => {
     return myDate.toDateString();
   });
 
+  //	fetch rooms data
   const { data } = useFetch(`/api/v1/rooms/${room}`);
 
+  //	fetch single Hotel data
   useEffect(() => {
     const fetchHotel = async () => {
       const res = await axios.get(`/api/v1/hotels/find/${data.hotelId}`);
