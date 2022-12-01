@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import './dashboard.css';
 import axios from 'axios';
-import BookedCard from '../../components/bookedCard';
+import BookedCard from '../../components/bookedCard/BookedCard';
 
 const Dashboard = () => {
   const { currentUser } = useSelector((state) => state.user);
