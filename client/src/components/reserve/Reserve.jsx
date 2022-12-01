@@ -13,7 +13,7 @@ const Reserve = ({ setOpen, hotelId }) => {
   const { data } = useFetch(`/api/v1/hotels/room/${hotelId}`);
   const { date } = useSelector((state) => state.search);
   const [payment, setPayment] = useState([]);
-
+  const [errMsg, setErrMsg] = useState('');
   const navigate = useNavigate();
 
   const getDatesInRange = (startDate, endDate) => {
@@ -77,11 +77,15 @@ const Reserve = ({ setOpen, hotelId }) => {
 
       setOpen(false);
       navigate('/dashboard');
-    } catch (err) {}
+    } catch (err) {
+      setErrMsg(err.message);
+      console.log(err);
+    }
   };
 
   return (
     <div className='reserve'>
+      {errMsg && <p>{errMsg}</p>}
       <div className='rContainer'>
         <FontAwesomeIcon
           icon={faCircleXmark}

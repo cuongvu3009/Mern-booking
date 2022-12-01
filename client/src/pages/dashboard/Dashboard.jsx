@@ -14,7 +14,6 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const res = await axios.get(`/api/v1/users/${currentUser.details._id}`);
-
       setBookings(res.data.bookedRooms);
     };
     fetchUser();
