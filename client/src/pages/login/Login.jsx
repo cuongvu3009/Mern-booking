@@ -8,11 +8,15 @@ import './login.css';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+    //	reset state
+    setError(false);
     e.preventDefault();
     dispatch(loginStart());
     try {
@@ -26,15 +30,24 @@ const Login = () => {
       setTimeout(() => {
         navigate('/');
       }, 200);
+      setError(false);
+      setErrMsg('');
     } catch (error) {
       dispatch(loginFailure());
-      console.log(error);
+      setErrMsg(error.message);
+      setError(true);
     }
   };
 
   return (
     <div className='login'>
       <div className='lContainer'>
+        {error &&
+          (errMsg ? (
+            <p className='error'>{errMsg}</p>
+          ) : (
+            <p className='error'>Something went wrong! Please try again.</p>
+          ))}
         <form onSubmit={handleLogin} className='lContainer'>
           <input
             type='text'

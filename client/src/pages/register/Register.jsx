@@ -12,11 +12,14 @@ const Register = () => {
   const [phone, setPhone] = useState('');
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
+  const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
 
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    setError(false);
     try {
       await axios.post('/api/v1/auth/register', {
         username,
@@ -36,14 +39,23 @@ const Register = () => {
       setTimeout(() => {
         navigate('/login');
       }, 500);
+      setErrMsg('');
+      setError(false);
     } catch (error) {
-      console.log(error);
+      setError(true);
+      setErrMsg(error.message);
     }
   };
 
   return (
     <div className='register'>
       <div className='rContainer'>
+        {error &&
+          (errMsg ? (
+            <p className='error'>{errMsg}</p>
+          ) : (
+            <p className='error'>Something went wrong! Please try again.</p>
+          ))}
         <form onSubmit={handleSignup} className='lContainer'>
           <input
             type='text'
