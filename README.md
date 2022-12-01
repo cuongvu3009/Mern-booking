@@ -1,6 +1,6 @@
 # Software Development Skills: Full-Stack 2022-23
 
-##  Demo: Updating soon
+##  Demo: https://www.youtube.com/watch?v=NpWA7xcpW8g
 
 1. Fullname: Vu Duc Cuong
 2. Email: cuongvu3009@gmail.com
