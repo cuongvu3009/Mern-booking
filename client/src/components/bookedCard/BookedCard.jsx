@@ -39,9 +39,8 @@ const BookedCard = ({ dates, room, paid, createdAt }) => {
               Payment made:
               <b>
                 €
-                {paid.reduce(
-                  (acc, curr) => Number(acc) + Number(curr) * dates.length
-                )}
+                {paid.reduce((acc, curr) => Number(acc) + Number(curr)) *
+                  dates.length}
               </b>
             </li>
           </ul>
