@@ -22,13 +22,15 @@ JWT = <YOUR_JWT_SECRET_KEY>
 ```
 2. Go to server folder and run "npm install" to install the dependencies
 3. Go to client folder and run "npm install" to install the dependencies
-5. Create an account with {"username": String, "email": String, "password": String, "phone": String, "city": String, "country": String} in this routes (POST: localhost:5000/api/v1/auth/register), you can also add {"isAdmin": Boolean} when creating user, to make it admin. With isAdmin is true, you can able to create/update/delete hotels, create/update/delete rooms, get all users, verify user role. 
 
 ## Start the project
 
 1. In server directory, run "npm run dev" to start the server
 2. In client directory, run "npm start" to start the client side 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+##  Create admin user
+Create an account with {"username": String, "email": String, "password": String, "phone": String, "city": String, "country": String} in this routes (POST: localhost:5000/api/v1/auth/register), you can also add {"isAdmin": Boolean} when creating user, to make it admin. With isAdmin is true, you can able to create/update/delete hotels, create/update/delete rooms, get all users, verify user role. 
 
 
 [API routes] can be accessed on [http://localhost:5000/api/v1/]. This endpoint can be edited in `server/server.js`.
